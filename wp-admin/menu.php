@@ -73,8 +73,10 @@ $menu[15] = array( __('Links'), 'manage_links', 'link-manager.php', '', 'menu-to
 
 // Avoid the comment count query for users who cannot edit_posts.
 if ( current_user_can( 'edit_posts' ) ) {
-	$awaiting_mod = wp_count_comments();
-	$awaiting_mod = $awaiting_mod->moderated;
+	// @see https://core.trac.wordpress.org/ticket/32366#comment:14
+	// $awaiting_mod = wp_count_comments();
+	// $awaiting_mod = $awaiting_mod->moderated;
+	$awaiting_mod = 0;
 	$menu[25] = array(
 		sprintf( __( 'Comments %s' ), '<span class="awaiting-mod count-' . absint( $awaiting_mod ) . '"><span class="pending-count">' . number_format_i18n( $awaiting_mod ) . '</span></span>' ),
 		'edit_posts',
