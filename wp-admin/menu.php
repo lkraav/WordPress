@@ -87,8 +87,10 @@ $menu[15]                           = array( __( 'Links' ), 'manage_links', 'lin
 
 // Avoid the comment count query for users who cannot edit_posts.
 if ( current_user_can( 'edit_posts' ) ) {
-	$awaiting_mod      = wp_count_comments();
-	$awaiting_mod      = $awaiting_mod->moderated;
+	// @see https://core.trac.wordpress.org/ticket/32366#comment:14
+	// $awaiting_mod   = wp_count_comments();
+	// $awaiting_mod   = $awaiting_mod->moderated;
+	$awaiting_mod      = 0;
 	$awaiting_mod_i18n = number_format_i18n( $awaiting_mod );
 	/* translators: %s: Number of comments. */
 	$awaiting_mod_text = sprintf( _n( '%s Comment in moderation', '%s Comments in moderation', $awaiting_mod ), $awaiting_mod_i18n );
